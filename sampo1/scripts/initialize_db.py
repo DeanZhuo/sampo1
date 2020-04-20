@@ -12,8 +12,8 @@ def setup_models(dbsession):
     Add or update models / fixtures in the database.
 
     """
-    model = models.mymodel.MyModel(name='one', value=1)
-    dbsession.add(model)
+    # model = models.mymodel.MyModel(name='one', value=1)
+    # dbsession.add(model)
 
 
 def parse_args(argv):

@@ -1,14 +1,10 @@
+from rhombus.lib.utils import cerr
 from rhombus.models import handler as rhombus_handler
-from rhombus.lib.utils import cerr, cout
-
-from .setup import setup
-
-from sampo.models import post, study, sample, fridge, transaction
+from sampo1.models import study, sample, fridge, transaction
 
 
 class DBHandler(rhombus_handler.DBHandler):
     # add additional class references
-    Post = post.Post
     Study = study.Study
     Location = study.Location
     Subject = study.Subject
@@ -30,19 +26,6 @@ class DBHandler(rhombus_handler.DBHandler):
             cerr('[sampo-rbmgr] Database has been initialized')
 
     # add additional methods here
-
-    def get_post(self, q):
-        """ get single, specific post """
-        if type(q) == int:
-            return self.Post.get(q, self.session())
-
-    def get_posts(self, query=None):
-        """ get multiple posts by query """
-        q = self.Post.query(self.session())
-
-        # do the necessary filtering here
-
-        return q.all()
 
     def get_study(self, stud=None):
         """get study by name or all"""

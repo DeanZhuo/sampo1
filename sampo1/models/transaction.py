@@ -22,7 +22,7 @@ class TakeReturn(Base):
     user = relationship(User, backref=backref('takereturn'))
 
     take_date = Column(types.Date, nullable=False)  # TODO: add stamp
-    returned = Column(types.Boolean, nullable=False, server_default=False)
+    returned = Column(types.Boolean, nullable=False, server_default="False")
 
     @staticmethod
     def add(dbsession, sample, user, date, ret):

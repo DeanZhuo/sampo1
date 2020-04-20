@@ -1,6 +1,3 @@
-from sampo.models import *
-
-
 def setup(dbh):
     dbh.EK.bulk_update(ek_initlist, dbsession=dbh.session())
 
