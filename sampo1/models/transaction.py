@@ -97,13 +97,13 @@ class TakeReturn(Base):
     def search(sample):
         """search by sample"""
 
+        dbh = get_dbhandler()
         if isinstance(sample, int) is not True:
-            dbh = get_dbhandler()
             tSam = dbh.get_sample(sam=sample)
         else:
             tSam = sample
 
-        q = TakeReturn.query(dbsession).filter(TakeReturn.sample_id == tSam,
+        q = TakeReturn.query(dbh.session()).filter(TakeReturn.sample_id == tSam,
                                                TakeReturn.returned == False).first()
         if q: return q
         return None
