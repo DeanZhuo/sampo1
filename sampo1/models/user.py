@@ -1,5 +1,5 @@
 from rhombus.models.core import *
-from .ek import *
+from sampo1.models.ek import *
 
 from rhombus.lib.auth import authfunc
 from rhombus.lib.roles import SYSADM, DATAADM

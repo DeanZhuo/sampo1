@@ -2,7 +2,7 @@ from rhombus import get_dbhandler
 
 from .sample import *
 from .meta import Base
-from .user import Group
+from sampo1.models.user import Group
 
 # note: shelf = level
 

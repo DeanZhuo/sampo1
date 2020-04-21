@@ -1,5 +1,5 @@
 from rhombus.models.core import *
-from .user import User, Group
+from sampo1.models.user import User, Group
 
 from sqlalchemy.orm import backref
 import math
