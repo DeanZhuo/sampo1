@@ -38,9 +38,6 @@ class Fridge(Base):
     creator_id = Column(types.Integer, ForeignKey('users.id'), nullable=False)
     creator = relationship(User, backref=backref('fridges'))
 
-    last_user_id = Column(types.Integer, ForeignKey('users.id'), nullable=False)
-    last_user = relationship(User, backref=backref('fridges'))
-
     @staticmethod
     def add(dbsession, group, name, type, model, temp, loc, desc, shelf,
             full=False, creator=None, last_user=None):
@@ -53,11 +50,6 @@ class Fridge(Base):
         else:
             tCrt = dbh.get_user(user=creator)
 
-        if last_user is None:
-            tLUsr = get_userid()
-        else:
-            tLUsr = dbh.get_user(user=last_user)
-
         tUuid = UUID.new()
         tGroup = dbh.get_group(group=group)
         tGName = tGroup.name
@@ -65,7 +57,7 @@ class Fridge(Base):
         tLoc = EK.getid(loc, dbsession, grp='@FRIDGELOC')
         fridge = Fridge(uuid=tUuid, group_name=tGName, fridge_name=name, fridge_type_id=tType,
                         fridge_model=model, temperature=temp, fridge_location_id=tLoc, fridge_desc=desc,
-                        fridge_isFull=full, shelf=shelf, creator_id=tCrt, last_user_id=tLUsr)
+                        fridge_isFull=full, shelf=shelf, creator_id=tCrt)
         dbsession.add(fridge)
 
     @staticmethod
@@ -77,11 +69,11 @@ class Fridge(Base):
         """
 
         for item in itemlist:
-            group, name, type, model, temperature, location, desc, isFull, shelf, creator, last_editor \
+            group, name, type, model, temperature, location, desc, isFull, shelf, creator \
                 = item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], \
-                  item[8], item[9], item[10]
+                  item[8], item[9]
             Fridge.add(dbsession, group, name, type, model, temperature, location, desc, shelf, isFull,
-                       creator, last_editor)
+                       creator)
 
     def as_dict(self):
         """return as python dictionary"""
@@ -89,7 +81,7 @@ class Fridge(Base):
         return dict(group=self.group_name, name=self.fridge_name, type=self.fridge_type_id,
                     model=self.fridge_model, temperature=self.temperature, location=self.fridge_location_id,
                     desc=self.fridge_desc, isFull=self.fridge_isFull, shelf=self.shelf,
-                    creator=self.creator_id, last_editor=self.last_user_id)
+                    creator=self.creator_id)
 
     @staticmethod
     def dump(out, query=None):
@@ -123,8 +115,6 @@ class Fridge(Base):
                 self.shelf = obj['shelf']
             if 'creator_id' in obj:
                 self.creator_id = obj['creator_id']
-            if 'last_user_id' in obj:
-                self.last_user_id = obj['last_user_id']
 
             return self
 
