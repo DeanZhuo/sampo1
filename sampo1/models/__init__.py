@@ -7,6 +7,8 @@ from rhombus.models.core import Base
 from sqlalchemy import Column, types, Sequence, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from rhombus.models.user import *
+from datetime import date
+from sqlalchemy import func
 
 # import or define all models here to ensure they are attached to the
 # Base.metadata prior to any initialization routines

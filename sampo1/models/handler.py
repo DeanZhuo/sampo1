@@ -1,6 +1,7 @@
 from rhombus.lib.utils import cerr
 from rhombus.models import handler as rhombus_handler
-from sampo1.models import study, sample, fridge, transaction
+from sampo1.models import study, sample, fridge
+from sampo1.models.transaction import TakeReturn
 
 
 class DBHandler(rhombus_handler.DBHandler):
@@ -14,8 +15,8 @@ class DBHandler(rhombus_handler.DBHandler):
     Fridge = fridge.Fridge
     Rack = fridge.Rack
     Box = fridge.Box
-    BoxCell = fridge.BoxCell
-    TakeReturn = transaction.TakeReturn
+    # BoxCell = fridge.BoxCell
+    TakeReturn = TakeReturn
 
     def initdb(self, create_table=True, init_data=True, rootpasswd=None):
         """ initialize database """
@@ -138,28 +139,28 @@ class DBHandler(rhombus_handler.DBHandler):
 
         raise RuntimeError('ERR: unknown data type for getting Box')
 
-    def get_boxcell(self, cell=None, sample=None, box=None, col=None, row=None):
-        """get box cell by sample, box, position, or all"""
-
-        if cell is None:
-            return self.BoxCell.query(self.session()).all()
-        if isinstance(cell, int):
-            return self.BoxCell.get(cell, self.session())
-        if isinstance(cell, list):
-            return [self.get_boxcell(x) for x in cell]
-        if sample:
-            return self.BoxCell.search(sample, self.session())
-        if box:
-            tBox = self.get_box(bx=box)
-            if col and row:
-                qResult = self.BoxCell.query(self.session()).filter(self.BoxCell.box_id == tBox)\
-                    .filter(self.BoxCell.column == col, self.BoxCell.row == row).first()
-            else:
-                qResult = self.BoxCell.query(self.session()).filter(self.BoxCell.box_id == tBox).all()
-            if qResult: return qResult
-            return None
-
-        raise RuntimeError('ERR: unknown data type for getting BoxCell')
+    # def get_boxcell(self, cell=None, sample=None, box=None, col=None, row=None):
+    #     """get box cell by sample, box, position, or all"""
+    #
+    #     if cell is None:
+    #         return self.BoxCell.query(self.session()).all()
+    #     if isinstance(cell, int):
+    #         return self.BoxCell.get(cell, self.session())
+    #     if isinstance(cell, list):
+    #         return [self.get_boxcell(x) for x in cell]
+    #     if sample:
+    #         return self.BoxCell.search(sample, self.session())
+    #     if box:
+    #         tBox = self.get_box(bx=box)
+    #         if col and row:
+    #             qResult = self.BoxCell.query(self.session()).filter(self.BoxCell.box_id == tBox)\
+    #                 .filter(self.BoxCell.column == col, self.BoxCell.row == row).first()
+    #         else:
+    #             qResult = self.BoxCell.query(self.session()).filter(self.BoxCell.box_id == tBox).all()
+    #         if qResult: return qResult
+    #         return None
+    #
+    #     raise RuntimeError('ERR: unknown data type for getting BoxCell')
 
     def get_takereturn(self, tr=None, take=False):
         """get loc by name, not returned (yet), or all"""
