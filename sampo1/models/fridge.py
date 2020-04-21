@@ -1,5 +1,8 @@
+from rhombus import get_dbhandler
+
 from .sample import *
 from .meta import Base
+from .user import Group
 
 # note: shelf = level
 

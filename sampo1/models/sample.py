@@ -1,3 +1,6 @@
+from sampo1.models.ek import EK
+
+from .fridge import *
 from sqlalchemy import and_
 
 from .study import *
@@ -11,7 +14,7 @@ class Sample(Base):
 
     __tablename__ = 'samples'
 
-    id = Column(types.Integer, Sequence('spec_seq_id', optional=True), primary_key=True)
+    id = Column(types.Integer, Sequence('sam_seq_id', optional=True), primary_key=True)
     uuid = Column(types.String, nullable=False)
     box_id = Column(types.Integer, ForeignKey('boxes.id'), nullable=False, server_default="0")
     spext = Column(types.String(10))
@@ -367,8 +370,8 @@ class Extraction(Sample):  # TODO: question: does extraction has aliquot?
     extract parts of the specimen
     """
 
-    spec_id = Column(types.Integer, ForeignKey('sample.id'), nullable=False)
-    spec = relationship(Specimen, backref=backref('extraction'))
+    spec_id = Column(types.Integer, ForeignKey('samples.id'), nullable=False)
+    spec = relationship(Specimen, backref=backref('extraction', remote_side= 'Sample.id'))    # TODO: somethings up
 
     ext_method_id = Column(types.Integer, ForeignKey('eks.id'), nullable=False)
     ext_method = EK.proxy('ext_method_id', '@EXTMETHOD')
