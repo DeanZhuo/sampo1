@@ -1,4 +1,4 @@
-sampo
+sampo (not done yet, please be patient. will got many update later)
 =====
 
 Getting Started
