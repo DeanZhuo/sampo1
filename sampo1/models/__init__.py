@@ -3,6 +3,11 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import configure_mappers
 import zope.sqlalchemy
 
+from rhombus.models.core import Base
+from sqlalchemy import Column, types, Sequence, ForeignKey
+from sqlalchemy.orm import relationship, backref
+from rhombus.models.user import *
+
 # import or define all models here to ensure they are attached to the
 # Base.metadata prior to any initialization routines
 from .mymodel import MyModel  # flake8: noqa

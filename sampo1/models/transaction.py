@@ -1,7 +1,4 @@
-from sqlalchemy import func
-
-from .sample import *
-from datetime import date
+from . import *
 
 
 class TakeReturn(Base):

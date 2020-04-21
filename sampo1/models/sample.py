@@ -1,9 +1,6 @@
-from sampo1.models.ek import EK
-
-from .fridge import *
-from sqlalchemy import and_
-
-from .study import *
+from . import *
+from .study import Study, Subject, checkYear
+from .fridge import Box
 
 
 class Sample(Base):
