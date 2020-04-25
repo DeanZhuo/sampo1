@@ -100,7 +100,7 @@ class ReportViewer(object):
 
         content.add(self.sample_report_table(report_list))
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: report template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: report template
                            {'html': content,
                             }, request=req
                            )
@@ -126,7 +126,7 @@ class ReportViewer(object):
 
         content.add(self.annual_report_table(reportlist))
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: report template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: report template
                            {'html': content,
                             }, request=req
                            )

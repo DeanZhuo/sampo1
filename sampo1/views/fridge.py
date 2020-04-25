@@ -173,7 +173,7 @@ class FridgeViewer(object):
             fridges.append(tFrd)
         req.fridges = fridges
 
-        return render_to_response("sampo:templates/generics_page.mako",     # TODO: fridge menu template
+        return render_to_response("sampo1:templates/generics_page.mako",     # TODO: fridge menu template
                                   {}, request=req
                                   )
 
@@ -210,7 +210,7 @@ class FridgeViewer(object):
         samples = dbh.get_sample(box=tBox.id)
         content = self.normal_view(samples)
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: box view template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: box view template
                                   {
                                       'html': content,
                                   }, request=req
@@ -234,7 +234,7 @@ class FridgeViewer(object):
             return HTTPFound(location='/',      # TODO: new fridge rack page
                              shelf=fridge['shelf'], fridge=tFrd.id)
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: simple template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: simple template
                                   {
                                       'html': content,
                                   }, request=req
@@ -258,7 +258,7 @@ class FridgeViewer(object):
             dbh.session().flush()
             return HTTPFound(location='/')  # TODO: fridge menu
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: simple template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: simple template
                                   {
                                       'html': content,
                                   }, request=req
@@ -280,7 +280,7 @@ class FridgeViewer(object):
             dbh.session().flush()
             return HTTPFound(location='/')  # TODO: fridge menu
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: simple template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: simple template
                                   {
                                       'html': content,
                                   }, request=req

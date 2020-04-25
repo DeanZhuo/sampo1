@@ -261,7 +261,7 @@ class SampleViewer(object):
             content.add(h2()['New Sample'])
             content.add(self.new_sample_form(subject_list))
 
-            return render_to_response("sampo:templates/generics_page.mako",  # TODO: simple template
+            return render_to_response("sampo1:templates/generics_page.mako",  # TODO: simple template
                                       {'html': content,
                                        }, request=req
                                       )
@@ -302,7 +302,7 @@ class SampleViewer(object):
                                              dStart=search_d['startD'], dEnd=search_d['endD'])
             req.search_list = search_l
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: search template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: search template
                                   {'html': content,
                                    }, request=req
                                   )
@@ -362,7 +362,7 @@ class SampleViewer(object):
             a(href='/')[button(label='Done')]  # TODO: go to search page (without var)
         )
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: search template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: search template
                                   {'html': content,
                                    }, request=req
                                   )
@@ -393,7 +393,7 @@ class SampleViewer(object):
             dbh.session().flush()
             return HTTPFound(location='/')  # TODO: select box page
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: simple template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: simple template
                                   {'html': content,
                                    }, request=req
                                   )
@@ -425,7 +425,7 @@ class SampleViewer(object):
             dbh.session().flush()
             return HTTPFound(location='/')  # TODO: search page (without var)
 
-        return render_to_response("sampo:templates/generics_page.mako",  # TODO: simple template
+        return render_to_response("sampo1:templates/generics_page.mako",  # TODO: simple template
                                   {'html': content,
                                    }, request=req
                                   )(req.POST)

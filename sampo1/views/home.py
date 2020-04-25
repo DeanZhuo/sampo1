@@ -3,7 +3,7 @@ from rhombus.views.home import login as rb_login, logout as rb_logout
 
 
 def index(request):
-    return render_to_response('sampo:templates/generic_page.mako',
+    return render_to_response('sampo1:templates/generic_page.mako',
                               {}, request=request
                               )
 
@@ -11,7 +11,7 @@ def index(request):
 def home(request):
     """return home page"""
 
-    return render_to_response('sampo:templates/generic_page.mako', {}, request=request)
+    return render_to_response('sampo1:templates/generic_page.mako', {}, request=request)
 
 
 # TODO: add sampo home, simple and bar template

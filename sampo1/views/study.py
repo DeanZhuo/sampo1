@@ -112,7 +112,7 @@ class StudyViewer(object):
         if req.method == 'GET':
             content = div()
             content.add(self.study_form(study))
-            return render_to_response("sampo:templates/generics_page.mako",     # TODO: simple template
+            return render_to_response("sampo1:templates/generics_page.mako",     # TODO: simple template
                                       {'html': content,
                                        }, request=req
                                       )
@@ -138,7 +138,7 @@ class StudyViewer(object):
         if req.method == 'GET':
             content = div()
             content.add(self.study_form(study))
-            return render_to_response("sampo:templates/generics_page.mako",     # TODO: simple template
+            return render_to_response("sampo1:templates/generics_page.mako",     # TODO: simple template
                                       {'html': content,
                                        }, request=req
                                       )
@@ -160,7 +160,7 @@ class StudyViewer(object):
             subjectList = dbh.Subject.getSub(dbh.session(), req.study, req.loc, req.year, last=True)
             content = div()
             content.add(self.subject_form(subjectList))
-            return render_to_response("sampo:templates/generics_page.mako",     # TODO: simple template
+            return render_to_response("sampo1:templates/generics_page.mako",     # TODO: simple template
                                       {'html': content,
                                        }, request=req
                                       )
