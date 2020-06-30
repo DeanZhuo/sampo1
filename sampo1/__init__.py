@@ -1,5 +1,5 @@
 from pyramid.config import Configurator
-from rhombus import get_dbhandler, cerr, init_app
+from rhombus import get_dbhandler, cerr, init_app, RhoRequest, get_userobj
 from rhombus.models.core import set_func_userid
 from .views import *
 
@@ -48,10 +48,31 @@ def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
 
-    cerr('sampo main() is running...')
-
-    # attach rhombus to /mgr url, include custom configuration
-    config = init_app(global_config, settings, prefix='/mgr',
-                      include=includeme, include_tags=['sampo1.includes'])
-
+    with Configurator(settings=settings) as config:
+        config.set_request_factory(RhoRequest)
+        config.add_request_method(get_userobj, 'user', reify=True)
+        config.include('.models')
+        config.add_static_view(name='rhombus_static', path="rhombus:static/")
+        config.include('pyramid_mako')
+        includeme(config)
+        config.scan()
     return config.make_wsgi_app()
+
+    # """This is the original"""
+    #
+    # with Configurator(settings=settings) as config:
+    #     config.include('.models')
+    #     config.include('pyramid_mako')
+    #     includeme(config)
+    #     config.scan()
+    # return config.make_wsgi_app()
+    #
+    # """with rhombus init app"""
+    #
+    # cerr('sampo main() is running...')
+    #
+    # # attach rhombus to /mgr url, include custom configuration
+    # config = init_app(global_config, settings, prefix='/mgr',
+    #                   include=includeme, include_tags=['sampo1.includes'])
+    #
+    # return config.make_wsgi_app()
